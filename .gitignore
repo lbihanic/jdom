@@ -1,8 +1,84 @@
-/.classpath
-/.project
+# Java artifacts
+# Compiled classes
+*.class
+# Package files
+*.jar
+*.war
+*.ear
+
+# Build tools artifacts
+# Ant
+build/
+classes/
+dist/
+build.properties
+# Maven
+target/
+pom.xml.*
+release.properties
+# Gradle
+.gradle
+# SBT
+.history
+# Node.js
+node_modules/
+
+# IDE artifacts
+# Eclipse
+.classpath
+.externalToolBuilders/
+.metadata/
+.packaging
+.project
+.settings/
+*.jpage
+bin/
+# IntelliJ IDEA
+.idea
+*.iml
+# NetBeans
+nbproject
+# Apple XCode
+*~.nib
+*.pbxuser
+*.perspective
+*.perspectivev3
+# Visual Studio Code
+.vscode
+# JS Hint
+.tern-project
+.recommenders
+
+# SCM tools artifacts
+# Git
+.gitignore
+# Subversion
+.svn/
+# CVS
+CVS/
+
+# Operating systems specific stuff
+# Mac OS X
+.DS_Store
+.Trash/
+._*
+# Windows
+Thumbs.db
+
+# Other tools
 /ebuild
-/.settings
-/build
 /cobertura.ser
-/build.properties
-/bin
+
+# Misc.
+.*~
+*~
+.#*
+~*
+.~*
+*.bak
+*.swp
+
+*.bad
+*.log
+*.old
+oldies/

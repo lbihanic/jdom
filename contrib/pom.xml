@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jdom</groupId>
+		<artifactId>parent</artifactId>
+		<version>2.0.7</version>
+	</parent>
+	<artifactId>contrib</artifactId>
+	<packaging>jar</packaging>
+
+	<name>JDOM Tools from external contributors</name>
+
+    <organization>
+        <name>JDOM</name>
+        <url>http://www.jdom.org</url>
+    </organization>
+
+    <mailingLists>
+        <mailingList>
+            <name>JDOM-interest Mailing List</name>
+            <post>jdom-interest@jdom.org</post>
+            <archive>http://jdom.markmail.org/</archive>
+        </mailingList>
+    </mailingLists>
+
+	<licenses>
+		<license>
+			<name>Similar to Apache License but with the acknowledgment clause removed</name>
+			<url>https://raw.github.com/hunterhacker/jdom/master/LICENSE.txt</url>
+			<distribution>repo</distribution>
+			<comments xml:space="preserve"><![CDATA[
+			
+@license@
+
+			]]></comments>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>git@github.com:/hunterhacker/jdom</url>
+		<connection>scm:git:git@github.com:hunterhacker/jdom</connection>
+		<developerConnection>scm:git:git@github.com:hunterhacker/jdom</developerConnection>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<developers>
+		<developer>
+			<id>hunterhacker</id>
+			<name>Jason Hunter</name>
+			<email>jhunter@servlets.com</email>
+		</developer>
+		<developer>
+			<id>rolfl</id>
+			<name>Rolf Lear</name>
+			<email>jdom@tuis.net</email>
+		</developer>
+	</developers>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom2</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>isorelax</groupId>
+			<artifactId>isorelax</artifactId>
+			<version>20030108</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
