@@ -54,8 +54,6 @@
 
 package org.jdom2.contrib.xpath;
 
-import static org.jdom2.test.util.UnitTestUtil.checkException;
-import static org.jdom2.test.util.UnitTestUtil.failNoException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -69,9 +67,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Test;
-
 import org.jdom2.Attribute;
 import org.jdom2.CDATA;
 import org.jdom2.Comment;
@@ -85,7 +83,6 @@ import org.jdom2.ProcessingInstruction;
 import org.jdom2.Text;
 import org.jdom2.filter.Filter;
 import org.jdom2.filter.Filters;
-import org.jdom2.test.util.UnitTestUtil;
 import org.jdom2.xpath.XPathBuilder;
 import org.jdom2.xpath.XPathDiagnostic;
 import org.jdom2.xpath.XPathExpression;
@@ -157,7 +154,7 @@ public abstract class AbstractTestXPathCompiled {
 		
 		assertFalse(xpath.equals(null));
 		assertFalse(xpath.equals(new Object()));
-		UnitTestUtil.checkEquals(xpath, xpath);
+		checkEquals(xpath, xpath);
 		
 		assertEquals("getXPath()", path, xpath.getExpression());
 		
@@ -1329,5 +1326,84 @@ public abstract class AbstractTestXPathCompiled {
 		assertFalse(ita.hasNext());
 		assertFalse(itb.hasNext());
 	}
-	
+
+    /* The following methods have been copied from org.jdom2.test.util.UnitTestUtil */
+    private static final AtomicBoolean isandroid = new AtomicBoolean(false);
+
+    public static final void setAndroid() {
+        isandroid.set(true);
+    }
+
+    /**
+     * Test whether two values are equals, in addition, check the hashCode() values
+     * This method will pass if both values are null.
+     * @param a The first value to check
+     * @param b The other value
+     */
+    public static final void checkEquals(Object a, Object b) {
+        if (a == null) {
+                if (b != null) {
+                        fail("Second value is not null like the first: " + b.toString());
+                }
+                return;
+        }
+        if (b == null) {
+                fail ("First value is not null like the second: " + a.toString());
+        }
+        assertTrue(a.equals(a));
+        assertTrue(b.equals(b));
+        if (!a.equals(b)) {
+                fail("First value '" + a + "' does not equals() second value '" + b + "'.");
+        }
+        if (!b.equals(a)) {
+                fail("Second value '" + b + "' does not equals() first value '" + a + "'.");
+        }
+        if (a.hashCode() != b.hashCode()) {
+                fail("Hashcodes of equals() values are different. " +
+                                "First value '" + a + "' (hashcode=" + a.hashCode() + ") " +
+                                "not same as " +
+                                "second value '" + b + "' (hashcode=" + b.hashCode() + ").");
+        }
+    }
+    /**
+     * Provide a standard way to fail when we expect an exception but did not
+     * get one...
+     */
+    public static final void failNoException(Class<? extends Throwable> expect) {
+        fail("This code was expected to produce the exception " + 
+                        expect.getName() + " but it was not thrown.");
+    }
+
+    /**
+     * Provide a standard test for checking for an exception.
+     * @param expect
+     * @param got
+     */
+    public static final void checkException(Class<? extends Throwable> expect,
+                Throwable got) {
+        if (expect == null) {
+                fail("We can't expect a null exception (cryptic enough?)"); 
+        }
+        if (got == null) {
+                fail("We expected an exception of type " + expect.getName() + 
+                                " but got a null value instead");
+        }
+        if (!expect.isInstance(got)) {
+                AssertionError ae = new AssertionError(
+                                "We expected an exception of type " + expect.getName() + 
+                                " but got a " + got.getClass().getName() + 
+                                " instead with message " + got.getMessage());
+                if (isandroid.get()) {
+                        System.out.println("ANDROID: About to throw AssertionError " +
+                                        "but we cannot initialize the cause... " +
+                                        "Here follows both the AssertionError and its cause");
+                        ae.printStackTrace();
+                        System.out.println("And the cause...");
+                        got.printStackTrace();
+                } else {
+                        ae.initCause(got);
+                }
+                throw ae;
+        }
+    }
 }
